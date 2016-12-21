@@ -38,3 +38,19 @@ captures/
 
 # Keystore files
 *.jks
+
+
+# Mac related
+.DS_Store
+
+# Intellij
+*.iml
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/libraries
+
+# Keystore files
+*.jks
+
+# External native build folder generated in Android Studio 2.2 and later
+.externalNativeBuild
