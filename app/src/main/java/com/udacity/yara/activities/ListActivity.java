@@ -1,7 +1,9 @@
-package com.udacity.yara;
+package com.udacity.yara.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.udacity.yara.R;
 
 public class ListActivity extends AppCompatActivity {
 
