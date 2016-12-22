@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Yara</string>
+
+    <string translatable="true" name="listitem_post_thumbnail">Thumbnail</string>
+    <string translatable="true" name="openDes">open description</string>
+    <string translatable="true" name="closedDes">" Closed desc"</string>
+    <string translatable="false" name="first_run">firstrun</string>
+    <string translatable="false" name="initial_subs">frontpage,all,announcements,Art,AskReddit,askscience,aww,blog,books,creepy,dataisbeautiful,DIY,Documentaries,EarthPorn,explainlikeimfive,Fitness,food,funny,Futurology,gadgets,gaming,GetMotivated,gifs,history,IAmA,InternetIsBeautiful,Jokes,LifeProTips,listentothis,mildlyinteresting,movies,Music,news,nosleep,nottheonion,OldSchoolCool,personalfinance,philosophy,photoshopbattles,pics,science,Showerthoughts,space,sports,television,tifu,todayilearned,TwoXChromosomes,UpliftingNews,videos,worldnews,WritingPrompts</string>
+    <string translatable="false" name="Frontpage">frontpage</string>
+
+    <string translatable="false" name="package_name">com.udacity.yara</string>
+    <string translatable="false" name="subreddit_pref_key">SUBREDDIT_PREF_KEY</string>
+
 </resources>

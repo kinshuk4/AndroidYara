@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/groupFav">
+        <item
+            android:id="@+id/action_favourites"
+            android:title="Favourites" />
+
+
+    </group>
+
+    <group android:id="@+id/group1">
+        <item
+            android:id="@+id/manageSubs"
+            android:title="Manage Subreddits" />
+
+
+    </group>
+
+
+    <group android:id="@+id/group2">
+
+
+    </group>
+
+</menu>
