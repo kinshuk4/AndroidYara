@@ -2,6 +2,7 @@ package com.udacity.yara.ui;
 
 import android.app.LoaderManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.Loader;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -71,15 +72,18 @@ public class ListActivity extends AppCompatActivity implements LoaderManager.Loa
         setDrawerLayout();
 
 
+        AnalyticsApplication application = (AnalyticsApplication) getApplication();
+        mTracker = application.getDefaultTracker();
 
         //Set the subreddits up in the navigation menu
         setSubrreddits();
 
 
 
+
     }
 
-    public void setSubrreddits() {
+    private void setSubrreddits() {
         MenuItem saveThis = drawerMenu.getItem(0);
         //int groupIDtoRemove=drawerMenu.getItem(1).getGroupId();
         drawerMenu.removeGroup(500);
@@ -131,6 +135,7 @@ public class ListActivity extends AppCompatActivity implements LoaderManager.Loa
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
     }
+
 
 
     @Override
