@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:icon="@drawable/ic_menu_sort_white_24dp"
+        app:showAsAction="always">
+        <menu>
+
+            <item
+                android:icon="@drawable/ic_hot"
+                android:id="@+id/menuSortHot"
+                android:title="Hot" />
+            <item
+                android:icon="@drawable/ic_new_24dp"
+                android:id="@+id/menuSortNew"
+                android:title="New" />
+            <item
+                android:icon="@drawable/ic_chart"
+                android:id="@+id/menuSortTop"
+                android:title="Top" />
+            <item
+                android:icon="@drawable/ic_lightning_24dp"
+                android:id="@+id/menuSortControversial"
+                android:title="Controversial" />
+        </menu>
+    </item>
+</menu>

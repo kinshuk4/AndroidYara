@@ -7,8 +7,8 @@
     <string translatable="true" name="openDes">open description</string>
     <string translatable="true" name="closedDes">" Closed desc"</string>
     <string translatable="false" name="first_run">firstrun</string>
-    <string translatable="false" name="initial_subs">frontpage,all,announcements,Art,AskReddit,askscience,aww,blog,books,creepy,dataisbeautiful,DIY,Documentaries,EarthPorn,explainlikeimfive,Fitness,food,funny,Futurology,gadgets,gaming,GetMotivated,gifs,history,IAmA,InternetIsBeautiful,Jokes,LifeProTips,listentothis,mildlyinteresting,movies,Music,news,nosleep,nottheonion,OldSchoolCool,personalfinance,philosophy,photoshopbattles,pics,science,Showerthoughts,space,sports,television,tifu,todayilearned,TwoXChromosomes,UpliftingNews,videos,worldnews,WritingPrompts</string>
-    <string translatable="false" name="Frontpage">frontpage</string>
+    <string translatable="false" name="initial_subs">home,all,announcements,Art,AskReddit,askscience,aww,blog,books,creepy,dataisbeautiful,DIY,Documentaries,EarthPorn,explainlikeimfive,Fitness,food,funny,Futurology,gadgets,gaming,GetMotivated,gifs,history,IAmA,InternetIsBeautiful,Jokes,LifeProTips,listentothis,mildlyinteresting,movies,Music,news,nosleep,nottheonion,OldSchoolCool,personalfinance,philosophy,photoshopbattles,pics,science,Showerthoughts,space,sports,television,tifu,todayilearned,TwoXChromosomes,UpliftingNews,videos,worldnews,WritingPrompts</string>
+    <string translatable="false" name="HomePage">home</string>
     <string translatable="true" name="manage_subreddits">Manage Subreddits</string>
     <string name="add_new_subreddit">Add new Subreddit</string>
     <string translatable="true" name="Points">" points"</string>
@@ -45,6 +45,8 @@
     <string translatable="false" name="reddit_created_utc">created_utc</string>
     <string translatable="false" name="reddit_points">points</string>
     <string translatable="false" name="reddit_favorites">favorites</string>
+
+    <string name="search">search</string>
 
 
     <string translatable="false" name="ad_unit_id">Ad publisher ID here</string>

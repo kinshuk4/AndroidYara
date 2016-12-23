@@ -69,7 +69,8 @@ public List<RedditItem> getListItems(){
 
     public void clearAdapter()
     {
-        listItemsList.clear();
+        if(listItemsList!=null)
+            listItemsList.clear();
         notifyDataSetChanged();
     }
 

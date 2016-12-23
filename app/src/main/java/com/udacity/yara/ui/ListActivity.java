@@ -2,6 +2,7 @@ package com.udacity.yara.ui;
 
 import android.app.LoaderManager;
 import android.content.Context;
+import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.content.SharedPreferences;
@@ -18,6 +19,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -26,10 +28,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.udacity.yara.R;
 import com.udacity.yara.adapter.RedditRecyclerAdapter;
 import com.udacity.yara.analytics.AnalyticsApplication;
+import com.udacity.yara.data.FavContract;
 import com.udacity.yara.model.RedditItem;
 import com.udacity.yara.util.Constants;
 
@@ -66,15 +70,18 @@ public class ListActivity extends AppCompatActivity implements LoaderManager.Loa
     SharedPreferences prefs;
     private Tracker mTracker;
 
-    private ArrayList<RedditItem> listItemsList = new ArrayList<RedditItem>();
+    private ArrayList<RedditItem> redditItemList = new ArrayList<RedditItem>();
     Parcelable mListState;
-
+    private String sortBy = "";
+    private String subReddit = "";
 
     private int counter = 0;
     private RedditRecyclerAdapter adapter;
 
     private boolean mTwoPane;
     private String after_id;
+
+    private Menu sortMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,12 +107,12 @@ public class ListActivity extends AppCompatActivity implements LoaderManager.Loa
         setNavigationView();
 
         if (savedInstanceState == null) {
-            updateList(getResources().getString(R.string.Frontpage));
-            getSupportActionBar().setTitle(R.string.Frontpage);
+            updateList(getResources().getString(R.string.HomePage));
+            getSupportActionBar().setTitle(R.string.HomePage);
         } else {
-            listItemsList = savedInstanceState.getParcelableArrayList(getString(R.string.listitems));
+            redditItemList = savedInstanceState.getParcelableArrayList(getString(R.string.listitems));
             mListState = savedInstanceState.getParcelable(getString(R.string.liststate_key));
-            adapter = new RedditRecyclerAdapter(this, listItemsList);
+            adapter = new RedditRecyclerAdapter(this, redditItemList);
             mRecyclerView.setAdapter(adapter);
             adapter.SetOnItemClickListener(adapterClick);
         }
@@ -152,6 +159,7 @@ public class ListActivity extends AppCompatActivity implements LoaderManager.Loa
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setDisplayShowHomeEnabled(false);
         toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
+
     }
 
     private void setDrawerLayout() {
@@ -177,6 +185,7 @@ public class ListActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     private void initLoader() {
+        Log.d(LOG_TAG,"initLoader()");
         getLoaderManager().initLoader(0, null, this);
     }
 
@@ -197,9 +206,9 @@ public class ListActivity extends AppCompatActivity implements LoaderManager.Loa
                 }
                 if (menuItem.getGroupId() == R.id.groupFav) {
                     initLoader();
-                    toolbar.setTitle("Favourites");
+                    toolbar.setTitle(getString(R.string.title_favourites));
                     mDrawerLayout.closeDrawers();
-
+                    showOverflowMenu(false);
                     return true;
                 } else updateList(menuItem.toString());
                 //Closing drawer on item click
@@ -212,18 +221,31 @@ public class ListActivity extends AppCompatActivity implements LoaderManager.Loa
 
     public void updateList(String subreddit) {
 
-
+        this.subReddit = subreddit;
         counter = 0;
         toolbar.setTitle(subreddit);
-
-        if (subreddit.equals(getResources().getString(R.string.Frontpage))) {
+        String subRedditSortBy = "";
+        if(!"".equals(sortBy)){
+            subRedditSortBy = "/"+sortBy;
+        }
+        if (subreddit.equals(getResources().getString(R.string.HomePage))) {
             subreddit = Constants.redditUrl + Constants.jsonEnd;
+            showOverflowMenu(false);
         } else {
-            subreddit = Constants.redditUrl + Constants.subredditUrl + subreddit + Constants.jsonEnd;
+            showOverflowMenu(true);
+            subreddit = Constants.redditUrl + Constants.subredditUrl + subreddit +subRedditSortBy+Constants.jsonEnd;
         }
 
 
-        adapter = new RedditRecyclerAdapter(this, listItemsList);
+//        if(!"".equals(sortBy)){
+//            if(subreddit.contains("?"))
+//                subreddit = subreddit+"&"+Constants.sort+sortBy;
+//            else
+//                subreddit = subreddit+"?"+Constants.sort+sortBy;
+//        }
+        Log.d(LOG_TAG,subreddit);
+
+        adapter = new RedditRecyclerAdapter(this, redditItemList);
         mRecyclerView.setAdapter(adapter);
         adapter.SetOnItemClickListener(adapterClick);
 
@@ -265,8 +287,10 @@ public class ListActivity extends AppCompatActivity implements LoaderManager.Loa
                         } catch (JSONException e) {
 
                         }
-
-                        listItemsList.add(item);
+                        if(redditItemList ==null){
+                            redditItemList = new ArrayList<>();
+                        }
+                        redditItemList.add(item);
 
                     }
                 } catch (JSONException e) {
@@ -341,19 +365,114 @@ public class ListActivity extends AppCompatActivity implements LoaderManager.Loa
 
     };
 
-
     @Override
-    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        return null;
+    public void onResume(){
+        super.onResume();
+        setSubrreddits();
+        Log.i(LOG_TAG, "Setting screen name: List Activity");
+        mTracker.setScreenName("Image~List Activity");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+    }
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        return new CursorLoader(this, FavContract.favourite.CONTENT_URI, null,
+                FavContract.favourite.COLUMN_FAVORITES + "=?", new String[]{Integer.toString(1)}, null);
     }
 
     @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        getDataFromCursor(data);
+        adapter.SetOnItemClickListener(adapterClick);
+    }
+
+    private void getDataFromCursor(Cursor cursor) {
+
+        redditItemList.clear();
+        if (cursor != null) {
+            for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+
+                RedditItem item = new RedditItem();
+                item.setId(cursor.getString(1));
+                item.setTitle(cursor.getString(2));
+                item.setAuthor(cursor.getString(3));
+                item.setThumbnail(cursor.getString(4));
+                item.setPermalink(cursor.getString(5));
+                item.setUrl(cursor.getString(6));
+                item.setImageUrl(cursor.getString(7));
+                item.setNumComments(cursor.getInt(8));
+                item.setScore(cursor.getInt(9));
+                item.setPostedOn(cursor.getLong(11));
+                item.setOver18(false);
+                item.setSubreddit(cursor.getString(12));
+
+                redditItemList.add(item);
+
+
+            }
+
+            updateViewWithResults(redditItemList);}
+
+    }
+    public void updateViewWithResults(List<RedditItem> result) {
+        adapter = new RedditRecyclerAdapter(this, result);
+        mRecyclerView.setAdapter(adapter);
 
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.sort_menu, menu);
+        this.sortMenu = menu;
+        showOverflowMenu(false);
+        return true;
+    }
+
+    public void showOverflowMenu(boolean showMenu){
+        if(sortMenu == null)
+            return;
+        Log.d(LOG_TAG, "showOverflowMenu()");
+        for(int i=0; i<sortMenu.size();i++){
+            sortMenu.getItem(i).setVisible(showMenu);
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (subReddit.equals(getResources().getString(R.string.HomePage))
+                || subReddit.equals(getResources().getString(R.string.title_favourites))) {
+            Toast.makeText(this,"Sorting cannot be applied to Home and Favourites.", Toast.LENGTH_LONG).show();
+            return true;
+        }
+        switch (item.getItemId()) {
+            case R.id.menuSortHot:
+                // User chose the "Settings" item, show the app settings UI...
+                sortBy = "hot";
+                break;
+
+            case R.id.menuSortNew:
+                // User chose the "Favorite" action, mark the current item
+                // as a favorite...
+                sortBy = "new";
+                break;
+            case R.id.menuSortControversial:
+                sortBy="controversial";
+                break;
+            case R.id.menuSortTop:
+                sortBy="top";
+                break;
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+
+        }
+        updateList(this.subReddit);
+        return true;
     }
 }
