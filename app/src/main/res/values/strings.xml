@@ -49,6 +49,7 @@
 
     <string translatable="false" name="ad_unit_id">Ad publisher ID here</string>
     <string name="title_favourites">Favourites</string>
+    <string name="no_favourites">No Favourites</string>
     <string name="new_subreddit">New Subreddit</string>
     <string name="askreddit">AskReddit</string>
 
