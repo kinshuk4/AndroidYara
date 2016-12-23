@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Yara</string>
+    <string name="title_detail">Reddit App</string>
+    <string name="title_ask_reddit">Reddit App</string>
 
     <string translatable="true" name="listitem_post_thumbnail">Thumbnail</string>
     <string translatable="true" name="openDes">open description</string>
@@ -7,8 +9,47 @@
     <string translatable="false" name="first_run">firstrun</string>
     <string translatable="false" name="initial_subs">frontpage,all,announcements,Art,AskReddit,askscience,aww,blog,books,creepy,dataisbeautiful,DIY,Documentaries,EarthPorn,explainlikeimfive,Fitness,food,funny,Futurology,gadgets,gaming,GetMotivated,gifs,history,IAmA,InternetIsBeautiful,Jokes,LifeProTips,listentothis,mildlyinteresting,movies,Music,news,nosleep,nottheonion,OldSchoolCool,personalfinance,philosophy,photoshopbattles,pics,science,Showerthoughts,space,sports,television,tifu,todayilearned,TwoXChromosomes,UpliftingNews,videos,worldnews,WritingPrompts</string>
     <string translatable="false" name="Frontpage">frontpage</string>
+    <string translatable="true" name="manage_subreddits">Manage Subreddits</string>
+    <string name="add_new_subreddit">Add new Subreddit</string>
+    <string translatable="true" name="Points">" points"</string>
+    <string translatable="true" name="comments">" comments"</string>
+    <string translatable="true" name="header_image">Header Image</string>
+    <string translatable="true" name="post_options_menu">Post options menu</string>
+    <string translatable="true" name="post_favourite_selector">Post Favourite Selector</string>
+
 
     <string translatable="false" name="package_name">com.udacity.yara</string>
     <string translatable="false" name="subreddit_pref_key">SUBREDDIT_PREF_KEY</string>
+    <string translatable="false" name="liststate_key">listState</string>
+    <string translatable="false" name="listitems">listItems</string>
+
+    <string translatable="false" name="data_update_key">com.udacity.yara.ACTION_DATA_UPDATED</string>
+    <string translatable="false" name="arg_item_id">item_id</string>
+
+
+    <!-- reddit model keys -->
+    <string translatable="false" name="reddit_id">id</string>
+    <string translatable="false" name="reddit_post_id">post_id</string>
+    <string translatable="false" name="reddit_title">title</string>
+    <string translatable="false" name="reddit_author">author</string>
+    <string translatable="false" name="reddit_permalink">permalink</string>
+    <string translatable="false" name="reddit_score">score</string>
+    <string translatable="false" name="reddit_num_comments">num_comments</string>
+    <string translatable="false" name="reddit_image_url">image_url</string>
+    <string translatable="false" name="reddit_url">url</string>
+    <string translatable="false" name="reddit_thumbnail">thumbnail</string>
+    <string translatable="false" name="reddit_posted_on">postedOn</string>
+    <string translatable="false" name="reddit_posted_on1">posted_on</string>
+    <string translatable="false" name="reddit_subreddit">subreddit</string>
+    <string translatable="false" name="reddit_over_18">over_18</string>
+    <string translatable="false" name="reddit_created_utc">created_utc</string>
+    <string translatable="false" name="reddit_points">points</string>
+    <string translatable="false" name="reddit_favorites">favorites</string>
+
+
+    <string translatable="false" name="ad_unit_id">Ad publisher ID here</string>
+    <string name="title_favourites">Favourites</string>
+    <string name="new_subreddit">New Subreddit</string>
+    <string name="askreddit">AskReddit</string>
 
 </resources>

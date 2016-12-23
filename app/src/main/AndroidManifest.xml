@@ -22,6 +22,29 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ui.DetailActivity"
+            android:label="@string/title_detail"
+            android:parentActivityName=".ui.ListActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.ListActivity" />
+        </activity>
+        <activity
+            android:name=".ui.ManageSubs"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.ListActivity" />
+        </activity>
+
+        <provider
+            android:name=".data.FavouriteProvider"
+            android:authorities="@string/package_name"
+            android:enabled="true"
+            android:exported="true" />
     </application>
 
 </manifest>

@@ -1,0 +1,134 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+
+    tools:context=".ui.ListActivity">
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/mainSV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <com.android.volley.toolbox.NetworkImageView
+                android:id="@+id/headerImage"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/header_image_Height"
+                android:contentDescription="@string/header_image"
+                android:scaleType="centerCrop" />
+
+
+            <LinearLayout
+                android:id="@+id/linearheader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/greyMidLight"
+                android:padding="10dp"
+                android:weightSum="1"
+
+                >
+
+                <TextView
+                    android:id="@+id/score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0.35"
+                    android:textColor="#ffffff" />
+
+                <TextView
+                    android:id="@+id/commentsNum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0.35"
+                    android:paddingLeft="10dp"
+                    android:paddingStart="10dp"
+                    android:textColor="#ffffff" />
+
+                <ImageButton
+                    android:id="@+id/addFav"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0.15"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:contentDescription="@string/post_favourite_selector"
+
+                    android:focusable="true"
+                    android:src="@drawable/selector" />
+
+                <ImageButton
+                    android:id="@+id/menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0.15"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:contentDescription="@string/post_options_menu"
+
+                    android:src="@drawable/ic_more_vert_white_24dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/titleHeader"
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                android:background="@color/greyMid"
+                android:padding="10dp"
+
+                >
+
+                <TextView
+                    android:id="@+id/headerTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp"
+
+                    />
+
+
+            </LinearLayout>
+
+
+            <android.support.v7.widget.RecyclerView
+
+                android:id="@+id/commentRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/darker_gray"
+                android:descendantFocusability="afterDescendants"
+                app:layoutManager="LinearLayoutManager"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                tools:listitem="@layout/comment_item" />
+
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_gravity="bottom"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/ad_unit_id" />
+</FrameLayout>

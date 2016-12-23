@@ -3,7 +3,7 @@
     <group android:id="@+id/groupFav">
         <item
             android:id="@+id/action_favourites"
-            android:title="Favourites" />
+            android:title="@string/title_favourites" />
 
 
     </group>
@@ -11,9 +11,7 @@
     <group android:id="@+id/group1">
         <item
             android:id="@+id/manageSubs"
-            android:title="Manage Subreddits" />
-
-
+            android:title="@string/manage_subreddits" />
     </group>
 
 

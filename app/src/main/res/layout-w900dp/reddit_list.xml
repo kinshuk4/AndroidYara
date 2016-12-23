@@ -9,7 +9,7 @@
     android:divider="?android:attr/dividerHorizontal"
     android:orientation="horizontal"
     android:showDividers="middle"
-    tools:context=".ui.RedditItemListActivity">
+    tools:context=".ui.ListActivity">
 
     <!--
     This layout is a two-pane layout for the RedditItems
@@ -20,7 +20,7 @@
     <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/reddititem_list"
-        android:name="com.abell431.browserforreddit.RedditItemListFragment"
+        android:name="com.udacity.yara.ui.ListActivity"
         android:layout_width="0dp"
         android:layout_weight="3"
         android:layout_height="match_parent"
