@@ -54,5 +54,6 @@
     <string name="no_favourites">No Favourites</string>
     <string name="new_subreddit">New Subreddit</string>
     <string name="askreddit">AskReddit</string>
+    <string name="sort">sort</string>
 
 </resources>

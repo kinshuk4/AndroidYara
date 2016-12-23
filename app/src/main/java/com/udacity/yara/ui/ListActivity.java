@@ -9,11 +9,13 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Parcelable;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -74,7 +76,7 @@ public class ListActivity extends AppCompatActivity implements LoaderManager.Loa
     Parcelable mListState;
     private String sortBy = "";
     private String subReddit = "";
-
+    private String mSearch = "";
     private int counter = 0;
     private RedditRecyclerAdapter adapter;
 
@@ -82,6 +84,8 @@ public class ListActivity extends AppCompatActivity implements LoaderManager.Loa
     private String after_id;
 
     private Menu sortMenu;
+
+    private SearchView mSearchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,6 +133,7 @@ public class ListActivity extends AppCompatActivity implements LoaderManager.Loa
             Log.i(LOG_TAG, "Two pane is false.");
             mTwoPane = false;
         }
+        toggleSort(false);
 
     }
 
@@ -185,7 +190,7 @@ public class ListActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     private void initLoader() {
-        Log.d(LOG_TAG,"initLoader()");
+        Log.d(LOG_TAG, "initLoader()");
         getLoaderManager().initLoader(0, null, this);
     }
 
@@ -208,7 +213,7 @@ public class ListActivity extends AppCompatActivity implements LoaderManager.Loa
                     initLoader();
                     toolbar.setTitle(getString(R.string.title_favourites));
                     mDrawerLayout.closeDrawers();
-                    showOverflowMenu(false);
+                    toggleMenu(false);
                     return true;
                 } else updateList(menuItem.toString());
                 //Closing drawer on item click
@@ -219,31 +224,54 @@ public class ListActivity extends AppCompatActivity implements LoaderManager.Loa
         });
     }
 
+    public void updateList(String subreddit, String searchQuery) {
+        this.subReddit = subreddit;
+        toolbar.setTitle(subreddit);
+        String searchQuerySetup = Constants.searchJson + "?q=" + searchQuery;
+        if (subreddit.equals(getResources().getString(R.string.HomePage))) {
+            subreddit = Constants.redditUrl + searchQuerySetup;
+            toggleSort(false);
+        } else {
+            toggleMenu(true);
+            subreddit = Constants.redditUrl + Constants.subredditUrl + subreddit + "/"+searchQuerySetup;
+        }
+        updateListFromUrl(subreddit);
+    }
+
     public void updateList(String subreddit) {
 
         this.subReddit = subreddit;
         counter = 0;
         toolbar.setTitle(subreddit);
         String subRedditSortBy = "";
-        if(!"".equals(sortBy)){
-            subRedditSortBy = "/"+sortBy;
+        if (!"".equals(sortBy)) {
+            subRedditSortBy = "/" + sortBy;
+        }
+        if(mSearchView!=null) {
+            mSearchView.setQuery("", false);
+            mSearchView.setIconified(true);
         }
         if (subreddit.equals(getResources().getString(R.string.HomePage))) {
             subreddit = Constants.redditUrl + Constants.jsonEnd;
-            showOverflowMenu(false);
+            toggleSort(false);
         } else {
-            showOverflowMenu(true);
-            subreddit = Constants.redditUrl + Constants.subredditUrl + subreddit +subRedditSortBy+Constants.jsonEnd;
+            toggleMenu(true);
+            subreddit = Constants.redditUrl + Constants.subredditUrl + subreddit + subRedditSortBy + Constants.jsonEnd;
         }
 
-
+        updateListFromUrl(subreddit);
 //        if(!"".equals(sortBy)){
 //            if(subreddit.contains("?"))
 //                subreddit = subreddit+"&"+Constants.sort+sortBy;
 //            else
 //                subreddit = subreddit+"?"+Constants.sort+sortBy;
 //        }
-        Log.d(LOG_TAG,subreddit);
+
+
+    }
+
+    public void updateListFromUrl(String url) {
+        Log.d(LOG_TAG, url);
 
         adapter = new RedditRecyclerAdapter(this, redditItemList);
         mRecyclerView.setAdapter(adapter);
@@ -253,7 +281,7 @@ public class ListActivity extends AppCompatActivity implements LoaderManager.Loa
 
         adapter.clearAdapter();
 
-        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, subreddit, (String) null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, (String) null, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
@@ -287,7 +315,7 @@ public class ListActivity extends AppCompatActivity implements LoaderManager.Loa
                         } catch (JSONException e) {
 
                         }
-                        if(redditItemList ==null){
+                        if (redditItemList == null) {
                             redditItemList = new ArrayList<>();
                         }
                         redditItemList.add(item);
@@ -309,7 +337,6 @@ public class ListActivity extends AppCompatActivity implements LoaderManager.Loa
         });
 
         queue.add(jsObjRequest);
-
     }
 
     public RedditRecyclerAdapter.OnItemClickListener adapterClick = new RedditRecyclerAdapter.OnItemClickListener() {
@@ -366,13 +393,14 @@ public class ListActivity extends AppCompatActivity implements LoaderManager.Loa
     };
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
         setSubrreddits();
         Log.i(LOG_TAG, "Setting screen name: List Activity");
         mTracker.setScreenName("Image~List Activity");
         mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
+
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         return new CursorLoader(this, FavContract.favourite.CONTENT_URI, null,
@@ -410,9 +438,11 @@ public class ListActivity extends AppCompatActivity implements LoaderManager.Loa
 
             }
 
-            updateViewWithResults(redditItemList);}
+            updateViewWithResults(redditItemList);
+        }
 
     }
+
     public void updateViewWithResults(List<RedditItem> result) {
         adapter = new RedditRecyclerAdapter(this, result);
         mRecyclerView.setAdapter(adapter);
@@ -424,53 +454,104 @@ public class ListActivity extends AppCompatActivity implements LoaderManager.Loa
 
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.sort_menu, menu);
         this.sortMenu = menu;
-        showOverflowMenu(false);
+        mSearchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.menuSearch));
+        setupSearchView(mSearchView);
+        toggleSort(false);
         return true;
     }
 
-    public void showOverflowMenu(boolean showMenu){
-        if(sortMenu == null)
+    private void setupSearchView(final SearchView searchItem) {
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                // TODO Auto-generated method stub
+                mSearchView.clearFocus();
+                updateList(subReddit, query);
+
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                // TODO Auto-generated method stub
+                return true;
+            }
+        });
+    }
+
+    public void toggleMenu(boolean showMenu) {
+        if (sortMenu == null)
             return;
-        Log.d(LOG_TAG, "showOverflowMenu()");
-        for(int i=0; i<sortMenu.size();i++){
+        Log.d(LOG_TAG, "toggleMenu()");
+
+        for (int i = 0; i < sortMenu.size(); i++) {
             sortMenu.getItem(i).setVisible(showMenu);
         }
+    }
+
+    public void toggleSelectiveMenu(boolean showMenu, String title) {
+        if (sortMenu == null)
+            return;
+        Log.d(LOG_TAG, "toggleMenu()");
+
+        for (int i = 0; i < sortMenu.size(); i++) {
+            if (title.equals(sortMenu.getItem(i).getTitle())) {
+                sortMenu.getItem(i).setVisible(showMenu);
+                break;
+            }
+        }
+    }
+
+    public void toggleSort(boolean showMenu) {
+        if (sortMenu == null)
+            return;
+        Log.d(LOG_TAG, "toggleSort()");
+        toggleSelectiveMenu(showMenu, getString(R.string.sort));
+//        MenuItem item = (MenuItem) findViewById(R.id.menuSort);
+//        for()
+//        if(item!=null){
+//            item.setVisible(showMenu);
+//        }
+
+    }
+
+    public void toggleSearch(boolean showMenu) {
+        if (sortMenu == null)
+            return;
+        Log.d(LOG_TAG, "toggleSearch()");
+        toggleSelectiveMenu(showMenu, getString(R.string.search));
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (subReddit.equals(getResources().getString(R.string.HomePage))
                 || subReddit.equals(getResources().getString(R.string.title_favourites))) {
-            Toast.makeText(this,"Sorting cannot be applied to Home and Favourites.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Sorting cannot be applied to Home and Favourites.", Toast.LENGTH_LONG).show();
             return true;
         }
         switch (item.getItemId()) {
             case R.id.menuSortHot:
-                // User chose the "Settings" item, show the app settings UI...
                 sortBy = "hot";
                 break;
 
             case R.id.menuSortNew:
-                // User chose the "Favorite" action, mark the current item
-                // as a favorite...
                 sortBy = "new";
                 break;
             case R.id.menuSortControversial:
-                sortBy="controversial";
+                sortBy = "controversial";
                 break;
             case R.id.menuSortTop:
-                sortBy="top";
+                sortBy = "top";
                 break;
             default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
                 return super.onOptionsItemSelected(item);
-
-
         }
         updateList(this.subReddit);
         return true;
