@@ -22,10 +22,10 @@
         android:id="@+id/reddititem_list"
         android:name="com.udacity.yara.ui.ListActivity"
         android:layout_width="0dp"
-        android:layout_weight="3"
         android:layout_height="match_parent"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
+        android:layout_weight="3"
         app:layoutManager="LinearLayoutManager"
         tools:context=".ui.RedditItemListActivity"
         tools:listitem="@layout/listitem_content" />
