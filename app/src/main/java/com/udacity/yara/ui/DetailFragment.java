@@ -223,10 +223,10 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
         }
 
         TextView commentsTxt = (TextView) rootView.findViewById(R.id.commentsNum);
-        commentsTxt.setText(String.valueOf((extras.getInt("num_comments"))) + application.getString(R.string.comments));
+        commentsTxt.setText(String.valueOf((extras.getInt("num_comments"))) );
 
         TextView points = (TextView) rootView.findViewById(R.id.score);
-        points.setText(String.valueOf((extras.getInt("score"))) + application.getString(R.string.Points));
+        points.setText(String.valueOf((extras.getInt("score"))) );
 
         TextView title = (TextView) rootView.findViewById(R.id.headerTitle);
         title.setText(String.valueOf((extras.getString("title"))));

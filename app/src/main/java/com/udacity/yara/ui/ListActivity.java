@@ -152,8 +152,10 @@ public class ListActivity extends AppCompatActivity implements LoaderManager.Loa
         String subString = prefs.getString(getString(R.string.subreddit_pref_key), "");
         List<String> mItems = Arrays.asList(subString.split(","));
         for (int i = 0; i < mItems.size(); i++) {
-            drawerMenu.add(500, Menu.NONE, Menu.NONE, mItems.get(i));
+            MenuItem item = drawerMenu.add(500, Menu.NONE, Menu.NONE, mItems.get(i));
+            item.setIcon(R.drawable.ic_reddit);
         }
+        navigationView.setItemIconTintList(null);
     }
 
 
@@ -260,13 +262,6 @@ public class ListActivity extends AppCompatActivity implements LoaderManager.Loa
         }
 
         updateListFromUrl(subreddit);
-//        if(!"".equals(sortBy)){
-//            if(subreddit.contains("?"))
-//                subreddit = subreddit+"&"+Constants.sort+sortBy;
-//            else
-//                subreddit = subreddit+"?"+Constants.sort+sortBy;
-//        }
-
 
     }
 

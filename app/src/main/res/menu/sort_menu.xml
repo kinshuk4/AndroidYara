@@ -13,8 +13,6 @@
         android:id="@+id/menuSort"
         app:showAsAction="always">
         <menu>
-
-
             <item
                 android:icon="@drawable/ic_hot"
                 android:id="@+id/menuSortHot"

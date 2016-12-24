@@ -75,8 +75,8 @@ public class FavouriteWidgetRemoteViewsService extends RemoteViewsService {
 
                 views.setTextViewText(R.id.widgetTitle, title);
                 views.setTextViewText(R.id.widgeSub, "r/"+subreddit);
-                views.setTextViewText(R.id.widgetPoints, String.valueOf(points)+" Points");
-                views.setTextViewText(R.id.widgetComments, String.valueOf(comments+" Comments"));
+                views.setTextViewText(R.id.widgetPoints, String.valueOf(points));
+                views.setTextViewText(R.id.widgetComments, String.valueOf(comments));
                 //final Intent fillInIntent = new Intent();
                 Intent openDetailActivity = new Intent();
 

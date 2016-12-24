@@ -22,64 +22,83 @@
 
         android:minHeight="72dp">
 
+        <TextView
+            android:id="@+id/id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
+
         <com.android.volley.toolbox.NetworkImageView
             android:id="@+id/avatar_imageview"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@id/id"
+
             android:layout_marginTop="16dp"
             android:contentDescription="@string/listitem_post_thumbnail"
+            android:scaleType="centerCrop"
             />
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_marginRight="16dp"-->
+        <!--android:layout_marginEnd="16dp"-->
 
         <LinearLayout
             android:id="@+id/textview_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignWithParentIfMissing="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_toStartOf="@id/avatar_imageview"
-            android:layout_toLeftOf="@id/avatar_imageview"
-            android:orientation="vertical"
-            android:paddingBottom="16dp"
-            android:paddingTop="16dp">
 
-            <TextView
-                android:id="@+id/id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            android:paddingTop="16dp"
+            android:layout_below="@+id/avatar_imageview"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:weightSum="1"
+            android:dividerPadding="5dp"
+            android:divider="@drawable/vertial_divider"
+            android:showDividers="middle"
+            >
 
-                android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
+
 
             <TextView
                 android:id="@+id/content"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:paddingLeft="20dp"
+                android:layout_weight="0.3"/>
 
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
             <TextView
                 android:id="@+id/comments"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-
-
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+                android:drawableLeft="@drawable/ic_comment_black_24dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:layout_weight="0.35"
+                android:foregroundGravity="center_horizontal"
+                android:gravity="center"
+                android:paddingLeft="30sp"
+                android:paddingRight="30sp"
+                />
 
             <TextView
                 android:id="@+id/score"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-
-
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+                android:drawableLeft="@drawable/ic_thermo_black_24dp"
+                android:drawableStart="@drawable/ic_thermo_black_24dp"
+                android:paddingLeft="30sp"
+                android:paddingRight="30sp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:layout_weight="0.35"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:foregroundGravity="center"
+                />
 
 
         </LinearLayout>

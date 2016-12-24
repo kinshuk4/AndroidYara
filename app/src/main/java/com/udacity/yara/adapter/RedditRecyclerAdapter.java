@@ -57,8 +57,8 @@ public class RedditRecyclerAdapter extends RecyclerView.Adapter<RedditRecyclerAd
         holder.title.setText(Html.fromHtml(listItems.getTitle()));
         //    listRowViewHolder.url.setText(Html.fromHtml(listItems.getUrl()));
         holder.subreddit.setText("r/"+ Html.fromHtml(listItems.getSubreddit()));
-        holder.comments.setText((Html.fromHtml(String.valueOf(listItems.getNumComments())))+" comments");
-        holder.score.setText(Html.fromHtml(String.valueOf(listItems.getScore()))+" points");
+        holder.comments.setText((Html.fromHtml(String.valueOf(listItems.getNumComments()))));
+        holder.score.setText(Html.fromHtml(String.valueOf(listItems.getScore())));
         //      listRowViewHolder.author.setText(Html.fromHtml(listItems.getAuthor()));
 
     }
@@ -94,7 +94,7 @@ public List<RedditItem> getListItems(){
             super(view);
             this.thumbnail = (NetworkImageView) view.findViewById(R.id.avatar_imageview);
             this.title = (TextView) view.findViewById(R.id.id);
-            this.recLayout = (RelativeLayout) view.findViewById(R.id.relCardLayout);
+//            this.recLayout = (RelativeLayout) view.findViewById(R.id.relCardLayout);
             this.subreddit = (TextView) view.findViewById(R.id.content);
             this.score = (TextView) view.findViewById(R.id.score);
             this.comments = (TextView) view.findViewById(R.id.comments);

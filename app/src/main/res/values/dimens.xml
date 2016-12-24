@@ -7,5 +7,5 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="widget_margin">8dp</dimen>
-    <dimen name="header_image_Height">200dp</dimen>
+    <dimen name="header_image_Height">300dp</dimen>
 </resources>
