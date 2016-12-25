@@ -99,15 +99,6 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentH
 
         public CommentHolder(View view) {
             super(view);
-            /*this.thumbnail = (NetworkImageView) view.findViewById(R.id.avatar_imageview);
-            this.title = (TextView) view.findViewById(R.id.id);
-            //this.url = (TextView) view.findViewById(R.id.url);
-            this.recLayout = (RelativeLayout) view.findViewById(R.id.relCardLayout);
-            this.subreddit = (TextView) view.findViewById(R.id.content);
-            this.score = (TextView) view.findViewById(R.id.score);
-            this.comments = (TextView) view.findViewById(R.id.comments); */
-            // this.author = (TextView) view.findViewById(R.id.author);
-
             this.author = (TextView) view.findViewById(R.id.author);
             this.body = (TextView) view.findViewById(R.id.body);
             this.postedOn = (TextView) view.findViewById(R.id.postedOn);

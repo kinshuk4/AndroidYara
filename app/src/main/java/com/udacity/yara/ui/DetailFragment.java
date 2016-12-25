@@ -157,15 +157,13 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
             }
         });
 
-        //Load Banner Ad
-        //Already Init
-        //MobileAds.initialize(getContext().getApplicationContext(), "ca-app-pub-0067204685712546~2086059370");
+
         AdView mAdView = (AdView) rootView.findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().
                 addTestDevice(AdRequest.DEVICE_ID_EMULATOR).
-                addTestDevice("C1D3074D21D7AE8AA1099BCD4ABAD9C6").
                 build();
         mAdView.loadAd(adRequest);
+        
 
         // Obtain the shared Tracker instance.
         AnalyticsApplication application = (AnalyticsApplication) getActivity().getApplication();

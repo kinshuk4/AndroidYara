@@ -49,7 +49,7 @@
     <string name="search">search</string>
 
 
-    <string translatable="false" name="ad_unit_id">Ad publisher ID here</string>
+    <string translatable="false" name="ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>
     <string name="title_favourites">Favourites</string>
     <string name="no_favourites">No Favourites</string>
     <string name="new_subreddit">New Subreddit</string>

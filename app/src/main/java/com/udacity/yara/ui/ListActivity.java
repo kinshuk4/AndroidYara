@@ -332,8 +332,41 @@ public class ListActivity extends AppCompatActivity implements LoaderManager.Loa
         });
 
         queue.add(jsObjRequest);
+        if(mTwoPane){
+            if(redditItemList!=null && redditItemList.size()!=0){
+                startFragment(redditItemList.get(0));
+            }
+        }
     }
 
+    public Bundle getBundleForRedditItem(RedditItem item){
+        Bundle arguments = new Bundle();
+        arguments.putString("title", item.getTitle());
+        arguments.putString("subreddit", item.getSubreddit());
+        arguments.putString("image_url", item.getImageUrl());
+        arguments.putString("url", item.getUrl());
+        arguments.putInt("score", item.getScore());
+        arguments.putString("thumbnail", item.getThumbnail());
+        arguments.putLong("postedOn", item.getPostedOn());
+        arguments.putInt("num_comments", item.getNumComments());
+        arguments.putString("permalink", item.getPermalink());
+        arguments.putString("id", item.getId());
+        arguments.putString("author", item.getAuthor());
+
+        return arguments;
+    }
+
+    public void startFragment(RedditItem item ){
+        Log.d(LOG_TAG,"Starting the fragment.");
+        Bundle arguments = getBundleForRedditItem(item);
+
+        DetailFragment fragment = new DetailFragment();
+
+        fragment.setArguments(arguments);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.reddititem_detail_container, fragment)
+                .commit();
+    }
     public RedditRecyclerAdapter.OnItemClickListener adapterClick = new RedditRecyclerAdapter.OnItemClickListener() {
         @Override
         public void onItemClick(View view, int position) {
@@ -342,26 +375,8 @@ public class ListActivity extends AppCompatActivity implements LoaderManager.Loa
             item.getTitle();
 
             if (mTwoPane) {
+                startFragment(item);
 
-                Bundle arguments = new Bundle();
-                arguments.putString("title", item.getTitle());
-                arguments.putString("subreddit", item.getSubreddit());
-                arguments.putString("image_url", item.getImageUrl());
-                arguments.putString("url", item.getUrl());
-                arguments.putInt("score", item.getScore());
-                arguments.putString("thumbnail", item.getThumbnail());
-                arguments.putLong("postedOn", item.getPostedOn());
-                arguments.putInt("num_comments", item.getNumComments());
-                arguments.putString("permalink", item.getPermalink());
-                arguments.putString("id", item.getId());
-                arguments.putString("author", item.getAuthor());
-
-                DetailFragment fragment = new DetailFragment();
-
-                fragment.setArguments(arguments);
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.reddititem_detail_container, fragment)
-                        .commit();
             } else {
                 Intent openDetailActivity = new Intent(getBaseContext(), DetailActivity.class);
 
