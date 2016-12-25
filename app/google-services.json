@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "699510175694",
+    "firebase_url": "https://yara-73026.firebaseio.com",
+    "project_id": "yara-73026",
+    "storage_bucket": "yara-73026.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:699510175694:android:61f0e3a6e57b9392",
+        "android_client_info": {
+          "package_name": "com.udacity.yara"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "699510175694-6gsg3u2pkf2kh69lqfbddpbhk6hasrvs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6D0_S7eL8MMod8ny6JuykZi6B9vImPLY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
