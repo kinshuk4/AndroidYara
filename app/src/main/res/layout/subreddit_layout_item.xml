@@ -18,7 +18,7 @@
         android:layout_marginStart="16dp"
         android:textAppearance="?android:attr/textAppearanceMedium" />
     <ImageView
-        android:contentDescription="Reordering icon for moving the subreddits around"
+        android:contentDescription="@string/reordering_icon_for_moving_the_subreddits_around"
         android:layout_width="?listPreferredItemHeight"
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical|right"

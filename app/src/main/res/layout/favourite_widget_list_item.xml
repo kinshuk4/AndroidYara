@@ -49,7 +49,7 @@
                 android:orientation="horizontal"
                 >
                 <ImageView
-                    android:contentDescription="Image icon to show points for the reddit item"
+                    android:contentDescription="@string/image_icon_to_show_points_for_the_reddit_item"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:focusable="false"
@@ -75,7 +75,7 @@
                 android:orientation="horizontal"
                 >
                 <ImageView
-                    android:contentDescription="Image icon to show number of comments for reddit item."
+                    android:contentDescription="@string/image_icon_to_show_number_of_comments_for_reddit_item"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:focusable="false"

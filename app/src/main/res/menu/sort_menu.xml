@@ -16,19 +16,19 @@
             <item
                 android:icon="@drawable/ic_hot"
                 android:id="@+id/menuSortHot"
-                android:title="Hot" />
+                android:title="@string/hot" />
             <item
                 android:icon="@drawable/ic_new_24dp"
                 android:id="@+id/menuSortNew"
-                android:title="New" />
+                android:title="@string/new1" />
             <item
                 android:icon="@drawable/ic_chart"
                 android:id="@+id/menuSortTop"
-                android:title="Top" />
+                android:title="@string/top" />
             <item
                 android:icon="@drawable/ic_lightning_24dp"
                 android:id="@+id/menuSortControversial"
-                android:title="Controversial" />
+                android:title="@string/controversial" />
         </menu>
     </item>
 </menu>

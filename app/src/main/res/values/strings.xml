@@ -55,5 +55,14 @@
     <string name="new_subreddit">New Subreddit</string>
     <string name="askreddit">AskReddit</string>
     <string name="sort">sort</string>
+    <string name="open_in_browser">Open In Browser</string>
+    <string name="share">Share</string>
+    <string name="hot">Hot</string>
+    <string name="new1">New</string>
+    <string name="top">Top</string>
+    <string name="controversial">Controversial</string>
+    <string name="image_icon_to_show_points_for_the_reddit_item">Image icon to show points for the reddit item</string>
+    <string name="image_icon_to_show_number_of_comments_for_reddit_item">Image icon to show number of comments for reddit item.</string>
+    <string name="reordering_icon_for_moving_the_subreddits_around">Reordering icon for moving the subreddits around</string>
 
 </resources>
