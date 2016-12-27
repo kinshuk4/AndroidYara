@@ -64,5 +64,7 @@
     <string name="image_icon_to_show_points_for_the_reddit_item">Image icon to show points for the reddit item</string>
     <string name="image_icon_to_show_number_of_comments_for_reddit_item">Image icon to show number of comments for reddit item.</string>
     <string name="reordering_icon_for_moving_the_subreddits_around">Reordering icon for moving the subreddits around</string>
+    <string name="add">Add</string>
+    <string name="cancel">Cancel</string>
 
 </resources>

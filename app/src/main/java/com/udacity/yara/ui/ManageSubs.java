@@ -95,7 +95,7 @@ public class ManageSubs extends AppCompatActivity implements OnStartDragListener
         final EditText userInputDialogEditText = (EditText) mView.findViewById(R.id.userInputDialog);
         alertDialogBuilderUserInput
                 .setCancelable(false)
-                .setPositiveButton("Add", new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.add, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialogBox, int id) {
                         // ToDo get user input here
                         mRecyclerViewAdapter.add(mRecyclerViewAdapter.getItemCount(),userInputDialogEditText.getText().toString());
@@ -106,7 +106,7 @@ public class ManageSubs extends AppCompatActivity implements OnStartDragListener
                     }
                 })
 
-                .setNegativeButton("Cancel",
+                .setNegativeButton(R.string.cancel,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialogBox, int id) {
                                 dialogBox.cancel();
